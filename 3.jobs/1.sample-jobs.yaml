@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: job-list
+  
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: kube-job-
+  labels:
+    jobgroup: jobexample
+  namespace: job-list
+spec:
+  completions: 6
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        jobgroup: jobexample
+    spec:
+      containers:
+        - name: good-job
+          image: devopscube/kubernetes-job-demo:latest
+          args: ["10"]
+      restartPolicy: OnFailure

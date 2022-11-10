@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+secretGenerator:
+- name: db-credentials 
+  files:
+  - username.txt
+  - password.txt
